@@ -43,8 +43,9 @@ static void RunSession(OrtAllocator& allocator, Ort::Session& session_object,
   }
 
   std::vector<Ort::Value> ort_outputs;
-  if (output_tensor)
+  if (output_tensor == 1) {
     session_object.Run(Ort::RunOptions{nullptr}, input_names.data(), ort_inputs.data(), ort_inputs.size(), &output_name, output_tensor, 1);
+  }
   else {
     ort_outputs = session_object.Run(Ort::RunOptions{nullptr}, input_names.data(), ort_inputs.data(), ort_inputs.size(), &output_name, 1);
     ASSERT_EQ(ort_outputs.size(), 1u);
